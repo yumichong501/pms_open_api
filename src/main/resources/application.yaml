@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+security:
+  jwt:
+    appKey: "test"
+    appSecret: "abcdefg1234567"
+    appExpire: 3600
+    appHeader: "token"
+
