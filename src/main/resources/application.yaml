@@ -1,10 +1,34 @@
 server:
   port: 8080
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: yaoling
+    password: yaoling2023
+    max-idle: 10
+    max-wait: 1000
+    min-idle: 5
+    initial-size: 5
+    url: jdbc:mysql://10.60.10.104:3306/pms-standard-dev?zeroDateTimeBehavior=convertToNull
+
+mybatis-plus:
+  global-config:
+    db-config:
+      table-prefix: pms_
+
+  configuration-properties:
+    prefix: pms_
+
+  #sql debug
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: false
+  mapper-locations: classpath:mapper/*.xml
+
 security:
   jwt:
     appKey: "test"
     appSecret: "abcdefg1234567"
     appExpire: 3600
     appHeader: "token"
-

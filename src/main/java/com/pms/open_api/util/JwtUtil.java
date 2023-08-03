@@ -26,9 +26,7 @@ public class JwtUtil {
         Date expireDate = new Date(nowDate.getTime() + appExpire * 1000);
         String token = JWT.create()
                 .withExpiresAt(expireDate)
-                .sign(
-                        Algorithm.HMAC256(appKey + appSecurity)
-                );
+                .sign(Algorithm.HMAC256(appKey + appSecurity));
 
         return token;
     }
