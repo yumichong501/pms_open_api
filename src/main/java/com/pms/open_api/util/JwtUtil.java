@@ -2,25 +2,23 @@ package com.pms.open_api.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import org.springframework.beans.factory.annotation.Value;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Component
+@ConfigurationProperties(prefix = "security")
 public class JwtUtil {
 
-    @Value("${security.jwt.appKey}")
-    private String appKey;
+    private static String appKey;
 
-    @Value("${security.jwt.appSecurity}")
-    private String appSecurity;
+    private static String appSecurity;
 
-    @Value("${security.jwt.appExpire}")
-    private int appExpire;
+    private static int appExpire;
 
-    @Value("${security.jwt.appHeader}")
-    private String appHeader;
-
-    public String createToken(){
+    public static String createToken(){
         Date nowDate = new Date();
         //过期时间
         Date expireDate = new Date(nowDate.getTime() + appExpire * 1000);
@@ -31,8 +29,20 @@ public class JwtUtil {
         return token;
     }
 
-    public Boolean checkToken(){
-        return true;
+    public static DecodedJWT checkToken(String token){
+        return JWT.require(Algorithm.HMAC256(appKey + appSecurity)).build().verify(token);
+    }
+
+    public void setAppKey(String appKey){
+        JwtUtil.appKey = appKey;
+    }
+
+    public void setAppSecurity(String appSecurity){
+        JwtUtil.appSecurity = appSecurity;
+    }
+
+    public void  setAppExpire(int appExpire){
+        JwtUtil.appExpire = appExpire;
     }
 
 }

@@ -27,8 +27,7 @@ mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
 
 security:
-  jwt:
-    appKey: "test"
-    appSecret: "abcdefg1234567"
-    appExpire: 3600
-    appHeader: "token"
+  appKey: test
+  appSecret: test1234567
+  appExpire: 3600
+
