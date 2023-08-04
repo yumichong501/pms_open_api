@@ -16,7 +16,7 @@ public class JwtUtil {
 
     private static String appSecurity;
 
-    private static int appExpire;
+    private static Integer appExpire;
 
     public static String createToken(){
         Date nowDate = new Date();
@@ -41,7 +41,7 @@ public class JwtUtil {
         JwtUtil.appSecurity = appSecurity;
     }
 
-    public void  setAppExpire(int appExpire){
+    public void  setAppExpire(Integer appExpire){
         JwtUtil.appExpire = appExpire;
     }
 

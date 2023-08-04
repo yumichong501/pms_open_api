@@ -23,8 +23,8 @@ public class TokenInterceptor implements HandlerInterceptor {
         }catch (Exception exception){
             HashMap result = new HashMap();
             result.put("code",1);
-            result.put("msg", "验证失败");
-            result.put("data","");
+            result.put("msg", "Token error!"+exception.getMessage());
+            result.put("data",null);
 
             String json = new ObjectMapper().writeValueAsString(result);
             response.setContentType("application/json:charset=UTF=8");
