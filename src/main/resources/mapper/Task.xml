@@ -27,9 +27,14 @@
             <if test="module_id > 0">
                 and pms_task.module_id = #{module_id}
             </if>
-            <if test="keywords != '' and keywords != null ">
+            <if test="keywords != null ">
                 and pms_task.task_name like concat('%',#{keywords},'%')
             </if>
-
+            <if test="beginTime != null">
+                and pms_task.update_time &gt;= #{beginTime}
+            </if>
+            <if test="endTime != null">
+                and pms_task.update_time &lt;= #{endTime}
+            </if>
     </select>
 </mapper>

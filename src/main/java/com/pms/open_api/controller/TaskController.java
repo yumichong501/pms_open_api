@@ -38,8 +38,8 @@ public class TaskController {
 
 
         Map filter = new HashMap();
-        filter.put("begin_time",beginTime);
-        filter.put("end_time",endTime);
+        filter.put("beginTime",beginTime);
+        filter.put("endTime",endTime);
 
 
         List list = this.taskService.getTaskList(filter);
