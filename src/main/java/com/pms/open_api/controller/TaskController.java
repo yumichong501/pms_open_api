@@ -1,15 +1,13 @@
 package com.pms.open_api.controller;
 
+import com.pms.open_api.Entity.Task;
 import com.pms.open_api.service.TaskService;
 import com.pms.open_api.util.JsonResponse;
 import com.pms.open_api.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -35,8 +33,6 @@ public class TaskController {
         if (beginTime.after(endTime)){
             return Response.error(1,"查询时间错误");
         }
-
-
         Map filter = new HashMap();
         filter.put("beginTime",beginTime);
         filter.put("endTime",endTime);
@@ -46,4 +42,11 @@ public class TaskController {
 
         return Response.success(list);
     }
+    @PostMapping("/addTask")
+    public JsonResponse addTask( @Validated(Task.insertGroup.class) Task task){
+        return Response.success(task.getTaskType());
+    }
+
+
+
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pms.open_api.mapper.TaskMapper">
 
-<mapper namespace="com.pms.open_api.mapper.ITaskMapper">
     <select id="getTaskList" resultType="com.pms.open_api.Entity.Task" parameterType="java.util.Map">
         select
             pms_task.*,
@@ -10,31 +12,31 @@
                     pms_project.project_code
                 WHEN 20 THEN
                     pms_enquiry.enquiry_code
-                END as module_code,
+            END as module_code,
             CASE pms_task.type
                 WHEN 10 THEN
                     pms_project.project_name
                 WHEN 20 THEN
                     pms_enquiry.enquiry_name
-                END as module_name
+            END as module_name
         from pms_task
         left join pms_project on pms_task.module_id = pms_project.id and pms_task.type = 10
         left join pms_enquiry on pms_task.module_id = pms_enquiry.id and pms_task.type = 20
         where pms_project.deleted_at is null and pms_enquiry.deleted_at is null and pms_task.deleted_at is null
-            <if test="type > 0">
-                and pms_task.type = #{type}
-            </if>
-            <if test="module_id > 0">
-                and pms_task.module_id = #{module_id}
-            </if>
-            <if test="keywords != null ">
-                and pms_task.task_name like concat('%',#{keywords},'%')
-            </if>
-            <if test="beginTime != null">
-                and pms_task.update_time &gt;= #{beginTime}
-            </if>
-            <if test="endTime != null">
-                and pms_task.update_time &lt;= #{endTime}
-            </if>
+        <if test="type > 0">
+            and pms_task.type = #{type}
+        </if>
+        <if test="module_id > 0">
+            and pms_task.module_id = #{module_id}
+        </if>
+        <if test="keywords != null ">
+            and pms_task.task_name like concat('%',#{keywords},'%')
+        </if>
+        <if test="beginTime != null">
+            and pms_task.update_time &gt;= #{beginTime}
+        </if>
+        <if test="endTime != null">
+            and pms_task.update_time &lt;= #{endTime}
+        </if>
     </select>
 </mapper>

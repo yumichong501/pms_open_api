@@ -4,13 +4,13 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: yaoling
-    password: yaoling2023
+    username: root
+    password: 123456
     max-idle: 10
     max-wait: 1000
     min-idle: 5
     initial-size: 5
-    url: jdbc:mysql://10.60.10.104:3306/pms-standard-dev?zeroDateTimeBehavior=convertToNull
+    url: jdbc:mysql://127.0.0.1:3306/pms-standard?zeroDateTimeBehavior=convertToNull
 
 mybatis-plus:
   global-config:
@@ -30,5 +30,5 @@ mybatis-plus:
 security:
   appKey: test
   appSecret: test1234567
-  appExpire: 3600
+  appExpire: 36000
 
