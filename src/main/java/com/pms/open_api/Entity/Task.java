@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 项目任务主表
@@ -189,9 +190,20 @@ public class Task implements Serializable {
      */
     private String taskPriorityColor;
 
+    /**
+     * 关联模块编号
+     */
     private transient String moduleCode;
 
+    /**
+     * 关联模块名称
+     */
     private transient String moduleName;
+
+    /**
+     * 子级任务
+     */
+    private transient List<Task> children;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -644,6 +656,30 @@ public class Task implements Serializable {
         this.taskPriorityColor = taskPriorityColor;
     }
 
+    public String getModuleCode(){
+        return moduleCode;
+    }
+
+    public void setModuleCode(String moduleCode){
+        this.moduleCode = moduleCode;
+    }
+
+    public String getModuleName(){
+        return moduleName;
+    }
+
+    public void setModuleName(String moduleName){
+        this.moduleName = moduleName;
+    }
+
+    public List<Task> getChildren(){
+        return children;
+    }
+
+    public void setChildren(List<Task> children){
+        this.children = children;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -738,6 +774,8 @@ public class Task implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", type=").append(type);
         sb.append(", moduleId=").append(moduleId);
+        sb.append(",moduleCode=").append(moduleCode);
+        sb.append(",moduleName=").append(moduleName);
         sb.append(", taskName=").append(taskName);
         sb.append(", taskTier=").append(taskTier);
         sb.append(", taskType=").append(taskType);
@@ -768,6 +806,7 @@ public class Task implements Serializable {
         sb.append(", taskPriorityText=").append(taskPriorityText);
         sb.append(", taskPriorityColor=").append(taskPriorityColor);
         sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append(",children=").append(children);
         sb.append("]");
         return sb.toString();
     }

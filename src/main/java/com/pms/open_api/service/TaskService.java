@@ -13,5 +13,7 @@ import java.util.Map;
 */
 public interface TaskService extends IService<Task> {
 
-    List getTaskList(Map query);
+    List<Task> getTaskList(Map query);
+
+    List<Task> getUpdateTaskList(Map query);
 }

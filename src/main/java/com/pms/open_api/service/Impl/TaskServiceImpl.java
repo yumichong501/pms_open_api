@@ -7,6 +7,7 @@ import com.pms.open_api.mapper.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,31 @@ public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task> implements Ta
     @Override
     public List<Task> getTaskList(Map query) {
         List list = taskMapper.getTaskList(query);
+        return setTree(list,0);
+    }
+
+    @Override
+    public List<Task> getUpdateTaskList(Map query) {
+        List<Task> list = taskMapper.getTaskList(query);
         return list;
+    }
+
+    /**
+     * 处理树形
+     * @param list
+     * @param parentId
+     * @return
+     */
+    private List<Task> setTree(List<Task> list,Integer parentId)
+    {
+        ArrayList<Task> returnList = new ArrayList<>();
+        for (Task item:list){
+            if (item.getParentId() == parentId){
+                item.setChildren(setTree(list,item.getId()));
+                returnList.add(item);
+            }
+        }
+        return returnList;
     }
 }
 

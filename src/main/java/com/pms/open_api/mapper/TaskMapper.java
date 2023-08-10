@@ -2,6 +2,7 @@ package com.pms.open_api.mapper;
 
 import com.pms.open_api.Entity.Task;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Map;
@@ -12,8 +13,9 @@ import java.util.Map;
 * @createDate 2023-08-09 16:09:50
 * @Entity com.pms.open_api.Entity.Task
 */
+@Mapper
 public interface TaskMapper extends BaseMapper<Task> {
-    List getTaskList(Map query);
+    List<Task> getTaskList(Map query);
 }
 
 

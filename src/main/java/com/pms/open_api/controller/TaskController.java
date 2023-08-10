@@ -25,8 +25,14 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping("/getTaskList")
-    public JsonResponse getTaskList(
+    /**
+     * 查询时间区间内更新的内容进行推送
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
+    @GetMapping("/getPullTaskList")
+    public JsonResponse getPullTaskList(
             @RequestParam(value = "beginTime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date beginTime,
             @RequestParam(value = "endTime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date endTime
     ){
@@ -38,10 +44,25 @@ public class TaskController {
         filter.put("endTime",endTime);
 
 
-        List list = this.taskService.getTaskList(filter);
+        List list = this.taskService.getUpdateTaskList(filter);
 
         return Response.success(list);
     }
+
+    @GetMapping("/getTaskList")
+    public JsonResponse getTaskList(
+            @RequestParam(value = "moduleId")  Integer moduleId,
+            @RequestParam(value = "type") Integer type
+    ){
+        Map filter = new HashMap();
+        filter.put("module_id",moduleId);
+        filter.put("type",type);
+
+        List<Task> list = this.taskService.getTaskList(filter);
+
+        return Response.success(list);
+    }
+
     @PostMapping("/addTask")
     public JsonResponse addTask( @Validated(Task.insertGroup.class) Task task){
         return Response.success(task.getTaskType());
