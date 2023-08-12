@@ -22,8 +22,9 @@ public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task> implements Ta
     private TaskMapper taskMapper;
     @Override
     public List<Task> getTaskList(Map query) {
-        List list = taskMapper.getTaskList(query);
-        return setTree(list,0);
+        List<Task> list = taskMapper.getTaskList(query);
+
+        return setTaskTree(list,0);
     }
 
     @Override
@@ -38,14 +39,17 @@ public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task> implements Ta
      * @param parentId
      * @return
      */
-    private List<Task> setTree(List<Task> list,Integer parentId)
+    private List setTaskTree(List<Task> list ,Integer parentId)
     {
-        ArrayList<Task> returnList = new ArrayList<>();
+        List<Task> returnList = new ArrayList<>();
         for (Task item:list){
-            if (item.getParentId() == parentId){
-                item.setChildren(setTree(list,item.getId()));
+            if (item.getParentId().equals(parentId)){
+                item.setChildren(setTaskTree(list,item.getId()));
                 returnList.add(item);
             }
+        }
+        if (returnList.size() == 0){
+            return null;
         }
         return returnList;
     }

@@ -65,7 +65,7 @@ public class TaskController {
 
     @PostMapping("/addTask")
     public JsonResponse addTask( @Validated(Task.insertGroup.class) Task task){
-        return Response.success(task.getTaskType());
+        return Response.success(new HashMap<>());
     }
 
 
