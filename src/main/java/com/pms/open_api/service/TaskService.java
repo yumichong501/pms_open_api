@@ -16,4 +16,6 @@ public interface TaskService extends IService<Task> {
     List<Task> getTaskList(Map query);
 
     List<Task> getUpdateTaskList(Map query);
+
+    Boolean addTask(Task task);
 }

@@ -32,6 +32,15 @@ public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task> implements Ta
         return list;
     }
 
+    @Override
+    public Boolean addTask(Task task) {
+        Integer row =  taskMapper.insert(task);
+        if (row > 0){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 处理树形
      * @param list

@@ -1,10 +1,10 @@
 package com.pms.open_api.Entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -128,17 +128,20 @@ public class Task implements Serializable {
     /**
      * 
      */
+    @TableLogic
     private Date deletedAt;
 
     /**
      * 
      */
-    private Date createTime;
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private String createTime;
 
     /**
      * 
      */
-    private Date updateTime;
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private String  updateTime;
 
     /**
      * 创建人
@@ -491,28 +494,28 @@ public class Task implements Serializable {
     /**
      * 
      */
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
     /**
      * 
      */
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
     /**
      * 
      */
-    public Date getUpdateTime() {
+    public String getUpdateTime() {
         return updateTime;
     }
 
     /**
      * 
      */
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
 

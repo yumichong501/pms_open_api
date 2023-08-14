@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class TokenInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String token = request.getParameter("token");
+        String token = request.getHeader("token");
         try {
             DecodedJWT decodedJWT = JwtUtil.checkToken(token);
             return true;

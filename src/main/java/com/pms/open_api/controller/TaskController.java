@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("/openApi/task/")
@@ -64,8 +61,12 @@ public class TaskController {
     }
 
     @PostMapping("/addTask")
-    public JsonResponse addTask( @Validated(Task.insertGroup.class) Task task){
-        return Response.success(task.getTaskType());
+    public JsonResponse addTask(@RequestBody @Validated(Task.insertGroup.class) Task task){
+        Boolean result = this.taskService.addTask(task);
+        if (!result){
+            return Response.error(1,"新建任务失败");
+        }
+        return Response.success(new ArrayList<>());
     }
 
 
