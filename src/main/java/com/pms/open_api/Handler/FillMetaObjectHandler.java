@@ -16,6 +16,10 @@ public class FillMetaObjectHandler implements MetaObjectHandler {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.setFieldValByName("createTime", sdf.format(date), metaObject);
         this.setFieldValByName("updateTime", sdf.format(date), metaObject);
+        this.setFieldValByName("createBy",1,metaObject);
+        this.setFieldValByName("createUser","admin",metaObject);
+        this.setFieldValByName("updateBy",1,metaObject);
+        this.setFieldValByName("updateUser","admin",metaObject);
     }
 
     @Override
@@ -23,5 +27,7 @@ public class FillMetaObjectHandler implements MetaObjectHandler {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         this.setFieldValByName("updateTime", sdf.format(date), metaObject);
+        this.setFieldValByName("updateBy",1,metaObject);
+        this.setFieldValByName("updateUser","admin",metaObject);
     }
 }
